@@ -1,0 +1,16 @@
+<table class="table table-striped table-bordered table-condensed">
+<% objs.each_with_index do |obj,index| %>
+  <% if index%col == 0 %>
+    <tr>
+  <% end %>
+    <td>
+      <%= yield(obj,index) %>
+    </td>
+  <% if index%col == (col-1) %>
+    </tr>
+  <% end %>
+<% end %>
+<% if objs.size%col > 0 %>
+  </tr>
+<% end %>
+</table>

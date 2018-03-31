@@ -1,0 +1,13 @@
+<% if user_signed_in? && caption_columns %>
+  <% options={}%>
+  <%= form_tag({action: "index"}, {method: :get, class: 'form-search'}) do %>
+    <%= text_field_tag("search", @search_value||params[:search], {size: 70, placeholder: placeholder, class: 'input-medium search-query span4'}) %>
+    <%= submit_tag(tt('search'), class: 'btn btn-warning') %>
+    <% if is_es %>
+    <% else %>
+      <%= select_tag("search_column",
+        options_for_select(caption_columns,{:class=>"form-control"})
+        ) %>
+    <% end %>
+  <% end %>
+<% end %>

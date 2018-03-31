@@ -1,0 +1,19 @@
+= simple_form_for "search", url: url_for(action: 'index'), method: :get, remote: true, html: {id: :search_form, class: "form-inline"} do |f|
+  .form-group.has-feedback
+    input#search_text.form-control placeholder='Search' name='search[field_value]'
+    span#search_btn.glyphicon.glyphicon-search.form-control-feedback aria-hidden="true"
+  = select_tag("search[field_name]", options_for_select(caption_columns),class:"form-control")
+javascript:
+  $('#search_btn').click(function(){
+    console.log('clicked');
+    $('#search_form').submit();
+    return false;
+  });
+  $('#search_text').keypress(function(event) {
+      var keycode = (event.keyCode ? event.keyCode : event.which);
+      if(keycode == '13') {
+        console.log('clicked');
+        $('#search_form').submit();
+        return false;
+      }
+  });

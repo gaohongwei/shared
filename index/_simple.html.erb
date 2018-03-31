@@ -1,0 +1,27 @@
+
+<% objs=klass.all %>
+<% columns=klass.column_names %>
+<table class="table table-striped table-bordered table-condensed">
+<thead><tr>
+<% columns.each do |col| %>
+  <th><%= tt(col,true) %></th>     
+<% end %>
+</tr></thead>
+
+<tbody>
+<% if objs.size > 0 %>
+  <% for obj in objs %>  
+    <tr>
+  		<% columns.each do |col| %>   
+        <% value =obj[col] %>
+        <td>
+          <%= tt(value,false) %>        
+        </td>
+			<% end %>       			 				 	
+    </tr>
+  <% end %>
+<% else %>
+    <tr><td colspan='10'><%= tt('empty') %></td></tr>
+<% end %>
+</tbody></table>
+

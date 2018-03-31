@@ -1,0 +1,14 @@
+<table class="table table-striped table-bordered table-condensed">
+  <%= render 'shared/index/table_header', columns: columns, captions: captions, select_all:true, status_col:true %>
+  <tbody>
+    <%= render partial: table_row_partial,
+      collection: objs, as: :obj,
+      cached: true,
+      locals: {columns: columns, captions: captions} %>
+
+    <% if objs.size < 1 %>
+        <tr><td colspan='10'><%= tt('empty') %></td></tr>
+    <% end %>
+  </tbody>
+</table>
+<%= render 'shared/index/table_footer', objs: objs, controller: controller_name, action: action_name, param_name: :page %>

@@ -1,0 +1,30 @@
+<tr>
+  <% if obj.is_a?(Hash) %>
+    <% obj.each_with_index do |(k,value),index| %>
+      <td>
+      <%= link2value(value,get_path(obj),index) %>
+      </td>
+    <%end%>
+  <% else %><!-- ActiveRevord -->
+    <%if @checkbox %>
+    <td><%= check_box_tag('ids[]', obj.id, false , id: obj.id ) %> </td>
+    <%end %>
+    <% columns.each_with_index do |col,index| %>
+      <% value =get_attr(obj,col) %>
+      <td>
+      <% if value.is_a?(Hash) %>
+        <%= link_to value[:label], value[:url] %>
+      <% else %>
+        <%= link2value(value,get_path(obj),index) %>
+      <% end %>
+      </td>
+    <% end %>
+<!--     <% if @act_links %>
+
+    <% else %>
+    <td><%= link2me(action: :edit, id: obj[:id]) %></td>
+    <% end %> -->
+  <% end %>
+</tr>
+
+

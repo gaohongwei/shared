@@ -1,0 +1,13 @@
+<% if user_signed_in? && caption_columns %>
+  <% options={}%>
+  <div class="container">
+  <%= form_tag({action: "index"}, {method: :get, class: 'navbar-form'}) do %>
+    <div class="input-group add-on">
+    <%= text_field_tag("search", @search_value||params[:search], {size: 20, placeholder: placeholder, class: 'form-control'}) %>
+    <%= render 'shared/index/search_button' %>
+    <%= select_tag("search[field_name]",
+      options_for_select(caption_columns),class:"form-control") %>
+    </div>
+  <% end %>
+  </div>
+<% end %>

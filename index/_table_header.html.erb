@@ -1,0 +1,47 @@
+<thead><tr>
+<!--   <%if select_all %>
+    <th><%= check_box_tag('all_ids', 'all', false, id: 'selectAll' ) %> </th>
+  <%end %> -->
+  <% columns.each_with_index do |col,index| %>
+    <th class='sortable'>
+      <%#= sort_col(sort_direction, sort_column, col,captions[index]) %>
+      <%= tt(captions[index]||columns[index]) %>
+      <span  class='caret'></span>
+    </th>
+  <% end %>
+<!--   <% if status_col %>
+    <th width='140px'><%= tt('status') %></th>
+  <% end %> -->
+</tr></thead>
+<script>
+  $('#id1').click(function() {
+    console.log(this);
+  });
+  $('#show_operation').click(function() {
+    $('#operation').toggle();
+  });
+  $('#selectAll').change(function() {
+    checked = $(this).prop('checked');
+    //$('.myCheckbox').is(':checked');
+    $('table input:checkbox').prop('checked', checked);
+  });
+  $('input:checkbox').change(function() {
+    var len = $('table input:checkbox:checked').length
+    if(len > 0)
+      $('#operator').show();
+    else
+      $('#operator').hide();
+
+    console.log('input clicked');
+    console.log('len=',len);
+  });
+  $('.sortable').click(function() {
+    var dom=$(this).find(".caret")
+    console.log(dom);
+    var klass = dom.hasClass("sort-desc") ? "sort-asc" : "sort-desc";
+    $('.sortable .caret').removeClass("sort-desc").removeClass("sort-asc");
+    dom.addClass(klass);
+
+  });
+
+</script>

@@ -1,0 +1,9 @@
+- options ||= []
+- checked ||= []
+- options.each do |option|
+  - checked = selected.include?(option[:value])
+  - id = "#{id}_#{option[:value]}"
+  .checkbox
+    label
+      = check_box_tag field_name, option[:value], checked , id: id, checked: checked
+      = option[:label]

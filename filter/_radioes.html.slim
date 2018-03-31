@@ -1,0 +1,14 @@
+/ checkboxs opts:opts, key:'id', label:name, var_name:'policy[]'
+- id = "#{title.downcase.tr(' ','_')}"
+- id_show_hide = "#{id}_show_hide"
+.filter-group
+  h4.filter-name data-toggle="collapse" data-target="##{id_show_hide}" id="#{id}"
+    = title
+    span
+      = image_tag("chevron.png", class: "chevron")
+  .collapse.in id="#{id_show_hide}"
+    - val_options.each do |opt|
+      div.radio
+        label
+          = radio_button_tag var_name, opt[:value], opt[:checked], id: opt[:value]
+          = opt[:label]

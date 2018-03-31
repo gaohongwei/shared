@@ -1,0 +1,31 @@
+- filters ||= {}
+= simple_form_for "search", url: url_for(action: 'index'), method: :get, remote: true, html: {id: :search_form} do |f|
+  .form-group
+    input#search_text.form-control placeholder='Search' name='search[field_value]'
+    = select_tag("search[field_name]", options_for_select(caption_columns),class:"form-control")
+    .text-center
+      button#search_btn.btn.btn-primary
+        | Refresh
+  / filters = {
+      set_id: {
+        selected: [],
+        options: [],
+        title: 'any titile'
+        }
+    }
+  - filters.each do |k,v|
+    = render 'shared/filter/checkboxes2', selected: v[:selected], options: v[:options], field_name: "search[#{k}][]", title: v[:title]
+javascript:
+  $('#search_btn').click(function(){
+    console.log('clicked');
+    $('#search_form').submit();
+    return false;
+  });
+  $('#search_text').keypress(function(event) {
+      var keycode = (event.keyCode ? event.keyCode : event.which);
+      if(keycode == '13') {
+        console.log('clicked');
+        $('#search_form').submit();
+        return false;
+      }
+  });

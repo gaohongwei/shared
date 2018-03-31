@@ -1,0 +1,20 @@
+div#index_page
+  - if signed_in? && !@tabs.blank?
+    .pull-right
+      = render 'layouts/page_tabs', tabs: @tabs
+  h1
+    = page_header(nil,@header)
+    |    
+    = link2action('new') if signed_in?
+.breadcrumb
+  - if @filters.blank?
+    = render '/shared/filter/search_only',placeholder: tt('placeholder'), caption_columns: @caption_columns,search_value:@search_value||params[:search]
+    #index_table
+      = render partial: table_partial, locals: {objs: @objs, columns: @columns, sort_direction: @sort_direction, sort_column: @sort_column,captions: @captions}
+  - else
+    .row
+      .col-md-2
+        = render '/shared/filter/search_form',placeholder: tt('placeholder'), caption_columns: @caption_columns,search_value:@search_value||params[:search], filters: @filters
+      .col-md-10
+        #index_table
+          = render partial: table_partial, locals: {objs: @objs, columns: @columns, sort_direction: @sort_direction, sort_column: @sort_column,captions: @captions}

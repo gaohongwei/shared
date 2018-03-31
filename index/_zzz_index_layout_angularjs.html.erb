@@ -1,0 +1,14 @@
+<%= render '/shared/index_search',placeholder: tt('placeholder'),caption_columns: @caption_columns,search_value:@search_value||params[:search], is_es:false %>
+
+<div ng-app="app" ng-controller='indexController' ng-init="initialize('<%= @objs.map{|x|x[:id]} %>')">
+<div ng-if="ids.length<1" >
+  <%= link2button(tt('select_for_actions'),'#') if @checkbox%>
+</div>
+<div ng-if="ids.length>0" >
+  <% (@checkbox||[]).each do |link|%>
+  <a class="btn btn-primary" ng-click="<%=link[:call]%>">
+  <%=tt(link[:label])%></a>
+  <% end %>
+</div>
+<%= yield %>
+</div><%#=ng-app="app" %>

@@ -1,0 +1,5 @@
+<% options = [{key: 'select_all', value: 'select_all', label: 'All'},{key: 'id2', value: 'value2', label: 'label2'}, {key: 'id3', value: 'value3', label: 'label3'}, {key: 'select_none', value: 'select_none', label: 'None'}] %>
+
+<%= render 'shared/filter/checkboxes', title: 'my checkboxes', var_name: 'var_name', val_options: options, val_selected: [] %>
+
+<%= render 'shared/filter/radioes', title: 'my radioes', var_name: 'var_name', val_options: options, val_selected: [] %>

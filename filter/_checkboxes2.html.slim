@@ -1,0 +1,32 @@
+/ render 'this_partial', selected: ['v1', 'v2'], options: [{label: 'l1', value: 'v1'}], field_name: 'search[set_id]', title: 'Any titile'
+- id = "#{title.downcase.tr(' ','_')}"
+- id_show_hide = "#{id}_show_hide"
+- id_more_less= "#{id}_more_less"
+- id_link = "#{id_more_less}_link"
+- options ||= []
+- if options.count > 4
+  - options1 = options[0,3]
+  - options2 = options[3..-1]
+- else
+  - options1 = options
+  - options2 = []
+- show_select_all = false if show_select_all.nil?
+.filter-group
+  h4.filter-name data-toggle="collapse" data-target="##{id_show_hide}" id="#{id}"
+    = title
+    span
+      = image_tag("chevron.png", class: "chevron")
+  .collapse.in id="#{id_show_hide}"
+    = render 'shared/filter/checkboxes', field_name: field_name, selected: selected,  options: options1
+    - if options2.count > 0
+      .collapse id="#{id_more_less}"
+        = render 'shared/filter/checkboxes', field_name: field_name, selected: selected,  options: options2
+      div.more_link
+        a data-toggle="collapse" data-target="##{id_more_less}" id="#{id_link}"
+          | More
+  javascript:
+    $("##{id_link}").on('click', function () {
+      var str_old = $(this).text();
+      var str_new = str_old == 'More' ? 'Less' : 'More'
+      $(this).text(str_new);
+    });

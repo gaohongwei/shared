@@ -1,0 +1,6 @@
+<%= page_header(@obj,@header) %>
+<%== link2actions() %>
+<div class="breadcrumb">
+  <%= render '/shared/form', obj: @obj, columns: @columns,
+      captions: @captions, header: @header, actions: @actions %>
+</div>
